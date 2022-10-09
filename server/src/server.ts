@@ -3,9 +3,10 @@ import cors from "cors";
 import { PrismaClient } from "@prisma/client";
 
 const app = express();
+app.use(cors());
+
 const prisma = new PrismaClient();
 app.use(express.json());
-app.use(cors());
 app.get("/games", async (req, res) => {
   const games = await prisma.game.findMany({
     include: {

@@ -130,6 +130,6 @@ app.get("/ads/:id/discord", async (req, res) => {
   return res.json(ad);
 });
 
-app.listen(4444, () => {
+app.listen(process.env.PORT || 4444, () => {
   console.log("rodando na porta 4444");
 });

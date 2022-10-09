@@ -17,7 +17,7 @@ module.exports = {
         },
       },
       backgroundImage: {
-        backgroundGalaxy: "url('./assets/fundo.png')",
+        backgroundGalaxy: "url('./fundo.png')",
         gradient:
           "linear-gradient(90deg, #9572FC 10%, #43E7AD 80%, #E1D55A 10%)",
         gradient2:

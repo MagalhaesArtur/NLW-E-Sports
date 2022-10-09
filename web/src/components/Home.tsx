@@ -26,7 +26,7 @@ function Home() {
   const [open1, setOpen] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:4444/games").then((res) => {
+    fetch(`${import.meta.env.VITE_API_URL}/games`).then((res) => {
       res.json().then((data) => {
         setGames(data[0]);
       });

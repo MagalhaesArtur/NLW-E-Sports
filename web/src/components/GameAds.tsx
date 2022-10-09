@@ -32,9 +32,9 @@ function GameAds() {
   const [discord, setDiscord] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:4444/games/${location.state.gameId}/ads`).then(
-      (res) => res.json().then((data) => setAds(data))
-    );
+    fetch(
+      `${import.meta.env.VITE_API_URL}/games/${location.state.gameId}/ads`
+    ).then((res) => res.json().then((data) => setAds(data)));
   }, []);
 
   return (

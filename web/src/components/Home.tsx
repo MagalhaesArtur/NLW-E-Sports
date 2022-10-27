@@ -11,6 +11,7 @@ import { Navigation } from "swiper";
 
 import "swiper/css";
 import "swiper/css/navigation";
+import { Loading } from "./Loading";
 
 export interface GameProps {
   banner: string;
@@ -26,7 +27,7 @@ function Home() {
   const [open1, setOpen] = useState(false);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/games`).then((res) => {
+    fetch("http://localhost:4444/games").then((res) => {
       res.json().then((data) => {
         setGames(data[0]);
       });
@@ -46,25 +47,31 @@ function Home() {
         está aqui.
       </h1>
 
-      <Swiper
-        spaceBetween={60}
-        modules={[Navigation]}
-        slidesPerView={5}
-        className="grid grid-cols-6 gap-6 mt-16   !z-0 !px-[50px]"
-        navigation={true}
-      >
-        {games.map((game: GameProps) => (
-          <SwiperSlide className="relative rounded-lg hover:cursor-pointer">
-            <Game
-              key={game.id}
-              gameId={game.id}
-              name={game.title}
-              anuncios={game._count.ads}
-              src={game.banner}
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {!(games.length == 0) ? (
+        <Swiper
+          spaceBetween={60}
+          modules={[Navigation]}
+          slidesPerView={5}
+          className="grid grid-cols-6 gap-6 mt-16  !z-0 !px-[50px]"
+          navigation={true}
+        >
+          {games.map((game: GameProps) => (
+            <SwiperSlide className="relative rounded-lg   hover:cursor-pointer">
+              <Game
+                key={game.id}
+                gameId={game.id}
+                name={game.title}
+                anuncios={game._count.ads}
+                src={game.banner}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      ) : (
+        <div className="h-[267px] flex justify-center items-center rounded-lg ">
+          <Loading />
+        </div>
+      )}
 
       <Dialog.Root open={open1} onOpenChange={setOpen}>
         <PublishAd setOpen={setOpen} />
@@ -76,7 +83,7 @@ function Home() {
             }}
             className="bg-black/60 inset-0 fixed"
           />
-          <Dialog.Content className="fixed bg-[#2A2634] py-8 px-10  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  text-white rounded-lg w-[600px] shadow-lg shadow-black/40">
+          <Dialog.Content className="fixed bg-[#2A2634] py-8 px-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  text-white rounded-lg w-[600px] shadow-lg shadow-black/40">
             <Dialog.Title className="text-3xl  font-black">
               Publique um anúncio
             </Dialog.Title>

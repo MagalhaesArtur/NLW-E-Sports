@@ -3,6 +3,7 @@ import { useParams, useLocation } from "react-router-dom";
 import { Ads } from "./Ads";
 import * as Dialog from "@radix-ui/react-dialog";
 import { DuoMatch } from "./DuoMatch";
+import { Loading } from "./Loading";
 
 interface LocationProps {
   state: {
@@ -32,9 +33,9 @@ function GameAds() {
   const [discord, setDiscord] = useState("");
 
   useEffect(() => {
-    fetch(
-      `${import.meta.env.VITE_API_URL}/games/${location.state.gameId}/ads`
-    ).then((res) => res.json().then((data) => setAds(data)));
+    fetch(`http://localhost:4444/games/${location.state.gameId}/ads`).then(
+      (res) => res.json().then((data) => setAds(data))
+    );
   }, []);
 
   return (
@@ -54,7 +55,13 @@ function GameAds() {
       </div>
 
       <Dialog.Root>
-        <Ads ads={ads} setDiscord={setDiscord} />
+        {!(ads.length == 0) ? (
+          <Ads ads={ads} setDiscord={setDiscord} />
+        ) : (
+          <div className="w-[600px] flex justify-center items-center !z-0 mt-10 h-[400px]">
+            <Loading size={100} />
+          </div>
+        )}
 
         <Dialog.Portal>
           <Dialog.Overlay className="bg-black/60 inset-0 fixed" />

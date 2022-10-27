@@ -40,11 +40,10 @@ function Home() {
 
   return (
     <div className="max-w-[1344px] mx-auto flex justify-center flex-col items-center my-20">
-      {logo ? (
+      <div className="w-[286px] h-[160px]">
+        {" "}
         <img src={logo} alt="" className="text-center" />
-      ) : (
-        <div className="h-[160px]"></div>
-      )}
+      </div>
 
       <h1 className="text-[64px] mt-20 text-white font-black">
         Seu{" "}

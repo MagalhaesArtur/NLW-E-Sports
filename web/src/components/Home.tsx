@@ -68,7 +68,7 @@ function Home() {
           ))}
         </Swiper>
       ) : (
-        <div className="h-[267px] flex justify-center items-center rounded-lg ">
+        <div className="h-[300px] flex justify-center items-center rounded-lg ">
           <Loading />
         </div>
       )}

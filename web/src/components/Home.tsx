@@ -40,7 +40,12 @@ function Home() {
 
   return (
     <div className="max-w-[1344px] mx-auto flex justify-center flex-col items-center my-20">
-      <img src={logo} alt="" className="text-center" />
+      {logo ? (
+        <img src={logo} alt="" className="text-center" />
+      ) : (
+        <div className="h-[160px]"></div>
+      )}
+
       <h1 className="text-[64px] mt-20 text-white font-black">
         Seu{" "}
         <span className="bg-gradient bg-clip-text text-transparent">duo</span>{" "}
@@ -68,7 +73,7 @@ function Home() {
           ))}
         </Swiper>
       ) : (
-        <div className="h-[300px] flex justify-center items-center rounded-lg ">
+        <div className="h-[267px] flex justify-center items-center rounded-lg ">
           <Loading />
         </div>
       )}

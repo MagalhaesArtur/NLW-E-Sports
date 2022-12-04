@@ -33,14 +33,14 @@ export function Ads({ ads, setDiscord }: AdCardProps) {
       spaceBetween={50}
       modules={[Navigation]}
       navigation={true}
-      slidesPerView={aux}
-      className="w-[700px] !px-10 !z-0 mt-10 h-[400px]"
+      slidesPerView={window.innerWidth < 768 ? 1 : aux}
+      className="md:w-[700px] w-full !px-10 !z-0 md:mt-10 mt-10 h-[400px] md:h-[380px]"
     >
       {!(ads.length == 0) ? (
         ads.map((ad) => (
           <SwiperSlide
             key={ad.id}
-            className="bg-roxoEscuro-100  flex gap-6 flex-col p-8 rounded-lg"
+            className="bg-roxoEscuro-100  flex md:gap-6 gap-3 flex-col md:p-8 p-6 rounded-lg"
           >
             <div className="flex flex-col">
               <h2 className="text-cinzinha-100 ">Nome</h2>
@@ -81,7 +81,8 @@ export function Ads({ ads, setDiscord }: AdCardProps) {
               }}
               className="p-3 bg-roxin-100 flex items-center justify-center rounded-xl gap-6 hover:bg-[#8b16f6] transition-all cursor-pointer  text-white font-bold"
             >
-              <GameController size={32} /> Conectar
+              <GameController size={20} />{" "}
+              <span className="text-base">Conectar</span>
             </Dialog.Trigger>
           </SwiperSlide>
         ))

@@ -7,9 +7,10 @@ import PublishAd from "./PublishAd";
 import CreateAd from "./CreateAd";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
+import { Mousewheel, Navigation, Pagination } from "swiper";
 
 import "swiper/css";
+import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Loading } from "./Loading";
 
@@ -39,13 +40,13 @@ function Home() {
   }
 
   return (
-    <div className="max-w-[1344px] mx-auto flex justify-center flex-col items-center my-20">
-      <div className="w-[286px] h-[160px]">
+    <div className=" md:max-w-[1344px] mx-auto flex justify-center flex-col items-center my-20">
+      <div className="md:w-[286px] w-[200px] md:h-[160px]">
         {" "}
         <img src={logo} alt="" className="text-center" />
       </div>
 
-      <h1 className="text-[64px] mt-20 text-white font-black">
+      <h1 className="md:text-[64px] text-3xl mt-20 text-white font-black">
         Seu{" "}
         <span className="bg-gradient bg-clip-text text-transparent">duo</span>{" "}
         está aqui.
@@ -54,10 +55,21 @@ function Home() {
       {!(games.length == 0) ? (
         <Swiper
           spaceBetween={60}
-          modules={[Navigation]}
-          slidesPerView={5}
-          className="grid grid-cols-6 gap-6 mt-16  !z-0 !px-[50px]"
-          navigation={true}
+          modules={
+            window.innerWidth <= 768
+              ? [Navigation, Mousewheel, Pagination]
+              : [Navigation]
+          }
+          direction={window.innerWidth < 768 ? "vertical" : "horizontal"}
+          slidesPerView={
+            window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 3 : 5
+          }
+          className="md:grid md:grid-cols-6 md:gap-6 md:mt-16 max-h-96 mt-10  md:max-h-[500px] !z-0 !px-[50px]"
+          navigation={window.innerWidth < 768 ? false : true}
+          mousewheel={true}
+          pagination={{
+            clickable: true,
+          }}
         >
           {games.map((game: GameProps) => (
             <SwiperSlide className="relative rounded-lg   hover:cursor-pointer">

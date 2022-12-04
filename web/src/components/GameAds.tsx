@@ -36,7 +36,9 @@ function GameAds() {
   console.log(ads.length);
   useEffect(() => {
     setIsAdsLoading(true);
-    fetch(`http://localhost:4444/games/${location.state.gameId}/ads`)
+    fetch(
+      `https://nlw-e-sports-production.up.railway.app/games/${location.state.gameId}/ads`
+    )
       .then((res) => res.json().then((data) => setAds(data)))
       .then(() => setIsAdsLoading(false));
   }, []);

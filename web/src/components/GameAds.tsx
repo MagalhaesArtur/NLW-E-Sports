@@ -4,6 +4,7 @@ import { Ads } from "./Ads";
 import * as Dialog from "@radix-ui/react-dialog";
 import { DuoMatch } from "./DuoMatch";
 import { Loading } from "./Loading";
+import { SmileySad } from "phosphor-react";
 
 interface LocationProps {
   state: {
@@ -31,11 +32,13 @@ function GameAds() {
   const location: LocationProps = useLocation();
   const [ads, setAds] = useState<AdCardProps[]>([]);
   const [discord, setDiscord] = useState("");
-
+  const [isAdsLoading, setIsAdsLoading] = useState(false);
+  console.log(ads.length);
   useEffect(() => {
-    fetch(`http://localhost:4444/games/${location.state.gameId}/ads`).then(
-      (res) => res.json().then((data) => setAds(data))
-    );
+    setIsAdsLoading(true);
+    fetch(`http://localhost:4444/games/${location.state.gameId}/ads`)
+      .then((res) => res.json().then((data) => setAds(data)))
+      .then(() => setIsAdsLoading(false));
   }, []);
 
   return (
@@ -49,18 +52,18 @@ function GameAds() {
         <h1 className="font-bold text-white text-2xl mt-5">
           {location.state.name}
         </h1>
-        <h2 className="font-normal text-zinc-400 text-lg mt-3">
+        <h2 className="font-normal  text-zinc-400 text-lg mt-3">
           Conecte-se e comece a jogar!
         </h2>
       </div>
 
       <Dialog.Root>
-        {!(ads.length == 0) ? (
-          <Ads ads={ads} setDiscord={setDiscord} />
-        ) : (
+        {isAdsLoading ? (
           <div className="w-[600px] flex justify-center items-center !z-0 mt-10 h-[400px]">
             <Loading size={100} />
           </div>
+        ) : (
+          <Ads ads={ads} setDiscord={setDiscord} />
         )}
 
         <Dialog.Portal>

@@ -40,7 +40,7 @@ export function Ads({ ads, setDiscord }: AdCardProps) {
         ads.map((ad) => (
           <SwiperSlide
             key={ad.id}
-            className="bg-roxoEscuro-100  flex md:gap-6 gap-3 flex-col md:p-8 p-6 rounded-lg"
+            className="bg-roxoEscuro-100  flex md:gap-5 gap-5 flex-col md:p-8 p-5 rounded-lg"
           >
             <div className="flex flex-col">
               <h2 className="text-cinzinha-100 ">Nome</h2>

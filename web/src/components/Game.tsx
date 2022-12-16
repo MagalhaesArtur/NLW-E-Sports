@@ -13,6 +13,7 @@ function Game(props: GameProps) {
   return (
     <div
       onClick={() => {
+        // GameAds.tsx
         navigate(`/game/${props.name}`, {
           state: {
             src: props.src,
@@ -24,7 +25,7 @@ function Game(props: GameProps) {
       }}
       className="relative overflow-hidden rounded-lg hover:cursor-pointer"
     >
-      <img src={props.src} className="w-full" alt="" />
+      <img src={props.src} className="w-full h-[270px]" alt="" />
 
       <div className="w-full pt-16 pl-4 pr-13 pb-4 bg-gradient2 absolute rounded-b-sm bottom-0 left-0 right-0">
         <strong className="text-white font-bold text-base">{props.name}</strong>
